@@ -1,0 +1,36 @@
+package Volcano;
+
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        Volcano v = new Volcano("Har HaGash", 10);
+        Random random = new Random();
+
+        for (int i = 0; i < 7; i++) {
+            int temp = random.nextInt(2001); 
+            v.add(temp);
+        }
+
+
+        System.out.println("Added measurements:");
+        v.print();
+
+        System.out.println("\nAverage temperature: " + v.average());
+        System.out.println("Index of maximum temperature below 1500: " + v.maxUnder(1500));
+
+        v.delete(3);
+        System.out.println("\nMeasurements after deleting index 3:");
+        v.print();
+
+        v.fix(0, 100);
+        System.out.println("\nMeasurements after fixing index 0 to 100:");
+        v.print();
+
+        v.deleteAll();
+        System.out.println("\nMeasurements after deleting all:");
+        v.print();
+
+        System.out.println("\n" + v.toString());
+    }
+}
