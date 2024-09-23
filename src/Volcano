@@ -1,0 +1,94 @@
+package Volcano;
+
+class Volcano {
+    private String name;
+    private int[] degrees;
+    private int count;
+
+    public Volcano(String name, int size) {
+        this.name = name;
+        this.degrees = new int[size];
+        this.count = 0;
+    }
+
+    public Volcano(Volcano v) {
+        this.name = v.name;
+        this.count = v.count;
+        this.degrees = new int[v.degrees.length];
+        for (int i = 0; i < v.degrees.length; i++) {
+            this.degrees[i] = v.degrees[i];
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public boolean add(int degree) {
+        if (count < degrees.length) {
+            degrees[count] = degree;
+            count++;
+            return true;
+        }
+        return false;
+    }
+
+    public void delete(int index) {
+        if (index >= 0 && index < count) {
+            for (int i = index; i < count - 1; i++) {
+                degrees[i] = degrees[i + 1];
+            }
+            count--;  
+            degrees[count] = 0;   
+        }
+    }
+
+    public void deleteAll() {
+        for (int i = 0; i < count; i++) {
+            degrees[i] = 0;
+        }
+        count = 0;
+    }
+
+    public void fix(int index, int newDegree) {
+        if (index >= 0 && index < count) {
+            degrees[index] = newDegree;
+        }
+    }
+
+    public double average() {
+        double sumDegrees = 0;
+        for (int i = 0; i < count; i++) {
+            sumDegrees += degrees[i];
+        }
+        double average = sumDegrees / count;
+		return average;  
+    }
+
+    public int maxUnder(int X) {
+        int max = Integer.MIN_VALUE;
+        int maxI = -1;
+        for (int i = 0; i < count; i++) {
+            if (degrees[i] < X && degrees[i] > max) {
+                max = degrees[i];
+                maxI = i;
+            }
+        }
+        return maxI;
+    }
+
+    public void print() {
+        for (int i = 0; i < count; i++) {
+            System.out.println(i + ") " + degrees[i]);
+        }
+    }
+
+    public String toString() {
+        return "The number of saved measurements is: " + count +
+               " and the length of the degrees array is: " + degrees.length;
+    }
+}
